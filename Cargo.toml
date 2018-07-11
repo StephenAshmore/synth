@@ -1,0 +1,6 @@
+[package]
+name = "synth"
+version = "0.1.0"
+authors = ["Stephen Ashmore <stephen@casestack.io>"]
+
+[dependencies]

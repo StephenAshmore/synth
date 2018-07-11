@@ -1,6 +1,14 @@
+use std::thread;
+
 mod cli;
+
 
 fn main() {
     let mut cli_interface = cli::Interface::new();
-    cli_interface.listen();
+
+    let handle = thread::spawn(move || {
+        cli_interface.listen();
+    });
+
+    handle.join().unwrap();
 }

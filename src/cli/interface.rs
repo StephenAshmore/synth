@@ -1,12 +1,13 @@
-use std::io::{self, Write, BufRead};
-
+use std::io::{self, BufRead};
+use std::sync::mpsc::{Sender, Receiver};
+use std::sync::mpsc;
 
 pub struct Interface {
     m_buffer: Vec<String>,
     m_user_finished: bool,
 }
 
-impl  Interface {
+impl Interface {
     pub fn new() -> Interface {
         Interface {
             m_buffer: Vec::new(),
@@ -34,9 +35,6 @@ impl  Interface {
     }
 
     fn get_input(&mut self) -> String {
-        print!("synth >> ");
-        io::stdout().flush().unwrap();
-
         let stdin = io::stdin();
         return stdin.lock().lines().next().unwrap().unwrap();
     }

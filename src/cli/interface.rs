@@ -1,16 +1,18 @@
 use std::io::{self, BufRead};
-use std::sync::mpsc::{Sender, Receiver};
+use std::sync::mpsc::{Sender};
 use std::sync::mpsc;
 
 pub struct Interface {
     m_buffer: Vec<String>,
+    m_sender: Sender<String>,
     m_user_finished: bool,
 }
 
 impl Interface {
-    pub fn new() -> Interface {
+    pub fn new(sender: Sender<String>) -> Interface {
         Interface {
             m_buffer: Vec::new(),
+            m_sender: sender,
             m_user_finished: false,
         }
     }
@@ -22,6 +24,7 @@ impl Interface {
             self.resolve_input(input.trim());
         }
     }
+
     fn resolve_input(&mut self, input: &str) {
         match &input as &str {
             "play" => println!("Play Synth"),
